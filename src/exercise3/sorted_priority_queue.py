@@ -19,9 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from priority_queue_base import PriorityQueueBase
-from positional_list import PositionalList
 from exceptions import Empty
+from positional_list import PositionalList
+from priority_queue_base import PriorityQueueBase
 
 
 class SortedPriorityQueue(PriorityQueueBase):  # base class defines _Item

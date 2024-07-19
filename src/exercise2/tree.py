@@ -44,7 +44,7 @@ class Tree:
 
         def __ne__(self, other):
             """Return True if other does not represent the same location."""
-            return not (self == other)  # opposite of __eq__
+            return not self == other  # opposite of __eq__
 
     # ---------- abstract methods that concrete subclass must support ----------
     def root(self):
@@ -84,8 +84,7 @@ class Tree:
         """Return the number of levels separating Position p from the root."""
         if self.is_root(p):
             return 0
-        else:
-            return 1 + self.depth(self.parent(p))
+        return 1 + self.depth(self.parent(p))
 
     def _height1(self):  # works, but O(n^2) worst-case time
         """Return the height of the tree."""
@@ -95,8 +94,7 @@ class Tree:
         """Return the height of the subtree rooted at Position p."""
         if self.is_leaf(p):
             return 0
-        else:
-            return 1 + max(self._height2(c) for c in self.children(p))
+        return 1 + max(self._height2(c) for c in self.children(p))
 
     def height(self, p=None):
         """Return the height of the subtree rooted at Position p.
@@ -119,27 +117,23 @@ class Tree:
     def preorder(self):
         """Generate a preorder iteration of positions in the tree."""
         if not self.is_empty():
-            for p in self._subtree_preorder(self.root()):  # start recursion
-                yield p
+            yield from self._subtree_preorder(self.root())  # start recursion
 
     def _subtree_preorder(self, p):
         """Generate a preorder iteration of positions in subtree rooted at p."""
         yield p  # visit p before its subtrees
         for c in self.children(p):  # for each child c
-            for other in self._subtree_preorder(c):  # do preorder of c's subtree
-                yield other  # yielding each to our caller
+            yield from self._subtree_preorder(c)  # yield from preorder of c's subtree
 
     def postorder(self):
         """Generate a postorder iteration of positions in the tree."""
         if not self.is_empty():
-            for p in self._subtree_postorder(self.root()):  # start recursion
-                yield p
+            yield from self._subtree_postorder(self.root())  # start recursion
 
     def _subtree_postorder(self, p):
         """Generate a postorder iteration of positions in subtree rooted at p."""
         for c in self.children(p):  # for each child c
-            for other in self._subtree_postorder(c):  # do postorder of c's subtree
-                yield other  # yielding each to our caller
+            yield from self._subtree_postorder(c)  # yield from postorder of c's subtree
         yield p  # visit p after its subtrees
 
     def breadthfirst(self):

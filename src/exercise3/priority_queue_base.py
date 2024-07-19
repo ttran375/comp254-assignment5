@@ -37,7 +37,7 @@ class PriorityQueueBase:
             return self._key < other._key  # compare items based on their keys
 
         def __repr__(self):
-            return "({0},{1})".format(self._key, self._value)
+            return f"({self._key},{self._value})"
 
     # ------------------------------ public behaviors ------------------------------
     def is_empty(self):  # concrete method assuming abstract len

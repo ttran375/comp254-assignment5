@@ -179,7 +179,8 @@ class LinkedBinaryTree(BinaryTree):
         return node._element
 
     def _attach(self, p, t1, t2):
-        """Attach trees t1 and t2, respectively, as the left and right subtrees of the external Position p.
+        """Attach trees t1 and t2, respectively, as the left and right subtrees of the external
+        Position p.
 
         As a side effect, set t1 and t2 to empty.
         Raise TypeError if trees t1 and t2 do not match type of this tree.
