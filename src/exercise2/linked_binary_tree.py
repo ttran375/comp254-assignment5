@@ -202,3 +202,14 @@ class LinkedBinaryTree(BinaryTree):
             node._right = t2._root
             t2._root = None  # set t2 instance to empty
             t2._size = 0
+
+    def compute_and_print_heights(self):
+        def postorder_height(p):
+            height = 0
+            for c in self.children(p):
+                height = max(height, postorder_height(c) + 1)
+            print(f"Element: {p.element()}, Height: {height}")
+            return height
+
+        if not self.is_empty():
+            postorder_height(self.root())
