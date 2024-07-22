@@ -203,7 +203,7 @@ class LinkedBinaryTree(BinaryTree):
             t2._root = None  # set t2 instance to empty
             t2._size = 0
 
-    def preorderNext(self, p):
+    def preorder_next(self, p):
         node = self._validate(p)
         # Case 1: If node has a left child, return the left child
         if node._left is not None:
@@ -218,7 +218,7 @@ class LinkedBinaryTree(BinaryTree):
             node = node._parent
         return None
 
-    def inorderNext(self, p):
+    def inorder_next(self, p):
         node = self._validate(p)
         # Case 1: If node has a right child, go to the leftmost node in the right subtree
         if node._right is not None:
@@ -227,12 +227,11 @@ class LinkedBinaryTree(BinaryTree):
                 node = node._left
             return self._make_position(node)
         # Case 2: If no right child, go up to the parent until we are a left child
-        else:
-            while node._parent is not None and node == node._parent._right:
-                node = node._parent
-            return self._make_position(node._parent)
+        while node._parent is not None and node == node._parent._right:
+            node = node._parent
+        return self._make_position(node._parent)
 
-    def postorderNext(self, p):
+    def postorder_next(self, p):
         node = self._validate(p)
         parent = node._parent
         # Case 1: If node is root, return None
