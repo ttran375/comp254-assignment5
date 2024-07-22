@@ -39,8 +39,8 @@ class SortedPriorityQueue(PriorityQueueBase):  # base class defines _Item
         """Add a key-value pair."""
         newest = self._Item(key, value)
         # Insert in sorted order
-        for i in range(len(self._data)):
-            if newest < self._data[i]:
+        for i, item in enumerate(self._data):
+            if newest < item:
                 self._data.insert(i, newest)
                 break
         else:
