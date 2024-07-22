@@ -205,13 +205,10 @@ class LinkedBinaryTree(BinaryTree):
 
     def preorder_next(self, p):
         node = self._validate(p)
-        # Case 1: If node has a left child, return the left child
         if node._left is not None:
             return self._make_position(node._left)
-        # Case 2: If node has no left child but has a right child, return the right child
         if node._right is not None:
             return self._make_position(node._right)
-        # Case 3: If node has neither left nor right children, traverse up the tree
         while node._parent is not None:
             if node == node._parent._left and node._parent._right is not None:
                 return self._make_position(node._parent._right)
@@ -220,13 +217,11 @@ class LinkedBinaryTree(BinaryTree):
 
     def inorder_next(self, p):
         node = self._validate(p)
-        # Case 1: If node has a right child, go to the leftmost node in the right subtree
         if node._right is not None:
             node = node._right
             while node._left is not None:
                 node = node._left
             return self._make_position(node)
-        # Case 2: If no right child, go up to the parent until we are a left child
         while node._parent is not None and node == node._parent._right:
             node = node._parent
         return self._make_position(node._parent)
@@ -234,11 +229,8 @@ class LinkedBinaryTree(BinaryTree):
     def postorder_next(self, p):
         node = self._validate(p)
         parent = node._parent
-        # Case 1: If node is root, return None
         if parent is None:
             return None
-        # Case 2: If node is the left child and parent has a right child,
-        # the next node in postorder is the leftmost node in the parent's right subtree
         if parent._right is not None and node == parent._left:
             node = parent._right
             while node._left is not None or node._right is not None:
@@ -247,5 +239,4 @@ class LinkedBinaryTree(BinaryTree):
                 else:
                     node = node._right
             return self._make_position(node)
-        # Case 3: Otherwise, the next node is the parent
         return self._make_position(parent)
