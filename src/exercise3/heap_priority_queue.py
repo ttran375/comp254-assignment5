@@ -47,10 +47,11 @@ class HeapPriorityQueue(PriorityQueueBase):  # base class defines _Item
         self._data[i], self._data[j] = self._data[j], self._data[i]
 
     def _upheap(self, j):
-        parent = self._parent(j)
-        if j > 0 and self._data[j] < self._data[parent]:
-            self._swap(j, parent)
-            self._upheap(parent)  # recur at position of parent
+        if j > 0:
+            parent = self._parent(j)
+            if self._data[j] < self._data[parent]:
+                self._swap(j, parent)
+                self._upheap(parent)
 
     def _downheap(self, j):
         if self._has_left(j):
